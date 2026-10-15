@@ -1,0 +1,32 @@
+构建与验证记录
+==============
+
+构建时间：2026-10-15 15:14（Asia/Hong_Kong）
+工具：Vivado 2023.2
+器件：xc7a35tfgg484-2
+顶层：fpga_dac_vco_bringup_top
+
+功能仿真：PASS
+  - 覆盖 0x0000 至 0x3FFF
+  - 精确检查 16384 个连续码
+  - CH1/CH2 数据一致
+  - 满量程结束后返回 0x2000
+
+实现结果：PASS
+  - Synthesis：0 errors，0 critical warnings
+  - Route：完成，0 unrouted nets
+  - DRC：0 errors
+  - Setup WNS：+8.495 ns
+  - Hold WHS：+0.192 ns
+  - Bitgen：Completed Successfully
+
+比特流：fpga_dac_vco_bringup.bit
+大小：310830 bytes
+SHA-256：4906AE39FFCA9D94F736359862116827E5636250AC3E915DFCD40ED3E25EA422
+
+使用边界：
+  - 这个固件让 CH1 和 CH2 同时进行全 14-bit 扫描；未使用的一路请断开负载。
+  - 第一次上板只接示波器确认 DAC 实际电压。
+  - Vivado 的 WNS/WHS 是 FPGA 内部时序结果；XDC 未对外部 AD9767 建立/保持时间建模。
+  - 测得 VCO/DDS ADC 口开路约 1.4 V，并不能证明该口允许 -5 V 到 +5 V。
+    在输入阻抗、DC 耦合和允许电压范围确认前，不要把全量程扫描直接接入该口。

@@ -1,0 +1,25 @@
+# Vivado generated working directories
+*.jou
+*.log
+*.str
+*.tmp
+*.wdb
+*.xpr
+*.runs/
+*.cache/
+*.gen/
+*.hw/
+*.ip_user_files/
+.Xil/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Tester data exports
+*.csv
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
